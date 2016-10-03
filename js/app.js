@@ -6,6 +6,10 @@ $(document).ready(function() {
     // not AJAX, just cool looking
     evt.preventDefault();
     var searchText= $("#search");
+    var $submitButton = $('#submit');
+
+    searchText.prop("disabled", true);
+    $submitButton.attr("disabled", true).val("searching......");
 
     // the AJAX part
     var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
@@ -23,6 +27,8 @@ $(document).ready(function() {
       }); // end each
       photoHTML += '</ul>';
       $('#photos').html(photoHTML);
+      searchText.prop("disabled", false);
+      $submitButton.attr("disabled", false).val("Search");
     }
     $.getJSON(flickerAPI, flickrOptions, displayPhotos);
 
